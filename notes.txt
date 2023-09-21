@@ -1,0 +1,5 @@
+property/attribute is a variable in class
+method is a function in a class
+
+'A' - single quotes for chars
+"String" - double quotes for string
