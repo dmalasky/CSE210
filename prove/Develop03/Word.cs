@@ -4,38 +4,53 @@ public class Word
     private string _word;
     private bool _hidden;
 
+    public Word()
+    {
 
-    // public Word(List<string> words)
-    // {
-    //     _words = words;
-    // }
+    }
+    public Word(string word, bool hidden)
+    {
+        _word = word;
+        _hidden = hidden;
+    }
     
+    public void SetText(string word)
+    {
+        _word = word;
+    }
+    public void SetHidden(bool hidden)
+    {
+        _hidden = hidden;
+    }
+    
+    
+    public string GetText()
+    {
+        return _word;
+    }
+
+    public bool GetHidden()
+    {
+        return _hidden;
+    }
+
     // Parse the text into a list.
-    public List<string> ParseText(string text)
+    public List<Word> ParseText(string text)
     {
         
-        List<string> words = new List<string>();
+        List<Word> words = new List<Word>();
         string[] wordsArray = text.Split(' ');
 
         foreach (string word in wordsArray)
         {
-            words.Add(word);
+            words.Add(new Word(word, false));
         }
 
         return words;
         
     }
 
-    // Display the 
-    public void DisplayText(List<string> words)
-    {
-        
-        foreach (string word in words)
-        {
-            Console.Write(word + " ");
-        }
-        Console.WriteLine();
-    }
+
 
 
     // keep track of individual words.

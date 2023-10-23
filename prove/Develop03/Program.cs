@@ -2,32 +2,40 @@ using System;
 using System.Collections.Concurrent;
 using System.Text.Encodings.Web;
 
+/*
+            TODO:
+            Hide random words start with 1
+            Hide 3 random words
+            If all words are hidden enter should close program
+        */
+
 class Program
 {
     static void Main(string[] args)
     {
         // create Reference object
         Reference reference = new Reference("Proverbs", "3", "5", "6");
+        
+        // Create word object
         Word word = new Word();
 
-        // List<Word> asdf = new List<Word>(); Maybe a list of words for "hidden" and the "word"
-        
-        List<string> words = new List<string>();
+        // List of type Word
+        List<Word> words = new List<Word>();
 
+        // text to pull from
         string text = "Trust in the Lord with all thine heart; and lean not unto thine own understanding; in all thy ways acknowledge him, and he shall direct thy paths.";
         
+        // Parses text into a list of type Word.
         words = word.ParseText(text);
-        /*
-            TODO:
-            Make the display function work
-            figure out how the word constructor should work
-            Make sure the methods in Word are working effiecinetly (parameters) so it can handle different scriptures.
-        */
+        
+        // Create scripture object
+        Scripture scripture = new Scripture(reference, words);
+        
 
-        // Displays the scripture and reference.
-        reference.DisplayReference();
-        word.DisplayText(words);
+        // Displays the reference and text.
+        scripture.DisplayScripture(words);
 
+        // Loops the output.
         bool done = false;
         while (done != true)
         {
@@ -38,9 +46,12 @@ class Program
             {
                 return;
             }
+            
+            scripture.HideWords(words);
+            scripture.DisplayScripture(words);
+            scripture.RandomIndex(words);
 
-            Console.WriteLine("Try again");
-
+            // if all words == hidden done = true.
 
         }
 
