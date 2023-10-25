@@ -4,9 +4,8 @@ using System.Text.Encodings.Web;
 
 /*
             TODO:
-            Hide random words start with 1
-            Hide 3 random words
-            If all words are hidden enter should close program
+            
+            fix the way it looks.
         */
 
 class Program
@@ -31,15 +30,19 @@ class Program
         // Create scripture object
         Scripture scripture = new Scripture(reference, words);
         
-
         // Displays the reference and text.
-        scripture.DisplayScripture(words);
+        
 
         // Loops the output.
         bool done = false;
         while (done != true)
         {
+            Console.Clear();
+            
+            
+            scripture.DisplayScripture(words);
             Console.WriteLine("Press enter to continue or type 'quit' to finish: ");
+            
             string choice = Console.ReadLine().ToLower();
             
             if (choice == "quit")
@@ -47,15 +50,17 @@ class Program
                 return;
             }
             
-            scripture.HideWords(words);
-            scripture.DisplayScripture(words);
-            scripture.RandomIndex(words);
+            done = scripture.IsAllHidden(words);
+            scripture.HideRandom(words);
 
-            // if all words == hidden done = true.
+            
+            // If all words are hidden, end.
+            
+           
 
+            
+            
         }
-
-
 
     }
 }

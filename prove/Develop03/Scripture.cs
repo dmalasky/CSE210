@@ -1,11 +1,8 @@
 using System.Diagnostics;
 using System.Dynamic;
-// Keep track of the scripture as a whole (ref + words)
+
 public class Scripture
 {
-    // // prop tab public with get set makes it private behind the scenes.
-    // public string Text { get; set; }
-
     Reference reference = new Reference("Proverbs", "3", "5", "6");
     List<Word> words = new List<Word>();
 
@@ -15,6 +12,7 @@ public class Scripture
         words = wordList;
     }
 
+    // Displays the scripture
     public void DisplayScripture(List<Word> wordList)
     {
         
@@ -26,55 +24,63 @@ public class Scripture
         Console.WriteLine();
     }
 
-    public void HideWords(List<Word> wordList)
+    // Hides random words.
+    public void HideRandom(List<Word> wordList)
     {
+        // Initialize needed variables
+        Random random = new Random();
+        int listLength = wordList.Count;
+        bool hidden = false;
         int count = 0;
-        foreach (Word word in wordList)
+
+
+        while (hidden == false)
         {
-            
-            if (word.GetHidden() == false)
+            while (count < 3)
             {
-                word.SetHidden(true);
-                word.SetText("_____");
-                count++;
-                if (count == 3)
+                // Make sure there are stil lvisable words to hide
+                if(IsAllHidden(wordList))
                 {
                     return;
                 }
-            }
+
+                // Generate random number
+                int randomNum = random.Next(0, listLength);
+
+                // Finds text/hidden of random word
+                hidden = wordList[randomNum].GetHidden();
+                string text = wordList[randomNum].GetText();
+
+                // If the word is not hidden, hide it.
+                if (hidden == false)
+                {
+                    wordList[randomNum].SetHidden(true);
+                    wordList[randomNum].SetText("_____");
+                    hidden = true;
+                    count++;
+                                    
+                }
+            }   
         }
+    }
+
+    public bool IsAllHidden(List<Word> wordList)
+    {
         
-    }
+        bool hidden = true;
 
-    public int RandomIndex(List<Word> wordList)
-    {
-        Random random = new Random();
-
-        int listLength = wordList.Count;
-
-        int randomNum = 0;
-        bool hidden = false;
-        while (hidden != true)
-        {  
-            randomNum = random.Next(0, listLength);
-
-            hidden = wordList[randomNum].GetHidden();
-            string text = wordList[randomNum].GetText();
-            Console.WriteLine($"{hidden} {text}");
+        foreach (Word word in wordList)
+        {
+            hidden = word.GetHidden();
+            if (hidden == false)
+            {
+                return false;
+            }
+           
         }
-        return randomNum; // 1, randomNum2, randomNum3;
 
+        return true;
     }
-
-    public void HideRandom()
-    {
-        int count = 0;
-        while (count < 3);
-            
-    }
-    
-   
-    // _text = "Trust in the Lord with all thine heart; and lean not unto thine own understanding; in all thy ways acknowledg him, and he shall direct thy paths.";
     
 
 
