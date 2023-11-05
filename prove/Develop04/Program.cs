@@ -1,7 +1,7 @@
 using System;
 
 // CREATIVITY - I made it so the duration must be in intervals of 10 so that the
-// activities can have more consistency.
+// activities can have more consistency and gave the Breathing Activity a new animation.
 
 class Program
 {
@@ -13,6 +13,8 @@ class Program
 
         while (choice != "4")
         {
+            
+            // Displays the menu.
             Console.WriteLine("Menu options");
             Console.WriteLine("\t1. Start Breathing Activity");
             Console.WriteLine("\t2. Start Reflecting Activity");
@@ -22,8 +24,10 @@ class Program
             choice = Console.ReadLine();
             string Description = "";
 
+            // Handles user choice.
             switch (choice)
             {
+                // Runs Breathing Activity.
                 case "1":
                     Console.Clear();
                     Description = "This activity will help you relax by walking throught breathing " +
@@ -36,6 +40,7 @@ class Program
                     Console.Clear();
 
                     break;
+                // Runs Reflection Activity.
                 case "2":
                     Console.Clear();
                     Description = "This activity will help you relfect on times in your life when you have shown " +
@@ -50,6 +55,7 @@ class Program
                     Console.Clear();
                     
                     break;
+                // Runs Listing Activity.
                 case "3":
                     Console.Clear();
                     Description = "This activity will help you reflect on the good things in your life by having " +
@@ -63,8 +69,10 @@ class Program
                     Console.Clear();
                     
                     break;
+                // Ends program
                 case "4":
                     return;
+                // Error handling.
                 default:
                     Console.WriteLine("Invalid input, try again.");
                     break;

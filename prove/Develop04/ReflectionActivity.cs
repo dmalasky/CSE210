@@ -1,5 +1,6 @@
 class ReflectionActivity : Activity
 {
+    // Stores prompts.
     private List<string> _reflectionPrompts = new List<string>
     {
         "Think of a time when you stood up for someone else.",
@@ -7,6 +8,8 @@ class ReflectionActivity : Activity
         "Think of a time when you helped someone in need.",
         "Think of a time when you did something truly selfless."
     };
+    
+    // Stores questions.
     private List<string> _reflectionQuestions = new List<string>
     {
         "Why was this experience meaningful to you?",
@@ -26,10 +29,7 @@ class ReflectionActivity : Activity
         
     }
 
-    // TODO
-    // Make it work with Duration
-    // Display more than one question. maybe 10 seconds per question.
-
+    // Reflection Activity.
     public void Reflection() 
     {
         
@@ -46,10 +46,11 @@ class ReflectionActivity : Activity
         ShowCountdown(5);
         Console.Clear();
         
+        // Determines how the long the activity is.
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(Duration);
         
-        
+        // Loops until time runs out.
         while (DateTime.Now < endTime)
         {
             DisplayQuestions(_reflectionQuestions);
@@ -61,6 +62,8 @@ class ReflectionActivity : Activity
         
     }
 
+    // Displays a random question to the user.
+    // (separate from Activity.DisplayPrompt because format is different)
     public void DisplayQuestions(List<string> Prompts)
     {
         int length = Prompts.Count;
@@ -68,6 +71,7 @@ class ReflectionActivity : Activity
         Console.Write($"> {Prompts[RandomNum]} ");
     }
 
+    // A separate spinner to pause in between prompts.
     public void LongSpinner()
     {
         
@@ -84,7 +88,7 @@ class ReflectionActivity : Activity
         
         // Controls how long the spinner goes.
         DateTime startTime = DateTime.Now;
-        DateTime endTime = startTime.AddSeconds(10); // end time is a future time.
+        DateTime endTime = startTime.AddSeconds(10);
 
         // Loops for however many seconds and shows animation.
         int i = 0;

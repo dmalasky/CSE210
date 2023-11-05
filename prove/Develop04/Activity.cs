@@ -17,12 +17,14 @@ public class Activity
         
     }
 
-    
+    // Displays an ending message for all activities.
     public void StartingMessage()
     {
         Console.WriteLine($"Welcome to the {ActivityName} Activity \n\n{ActivityDescription}\n");
         
     }
+    
+    // Asks the user how the long they want to do the activity.
     public void SetDuration()
     {
         
@@ -43,6 +45,8 @@ public class Activity
         }
 
     }
+    
+    // Displays an ending message for all activities.
     public void EndingMessage()
     {
         Console.WriteLine("\nWell done!!");
@@ -51,6 +55,8 @@ public class Activity
         Spinner();
         
     }
+    
+    // Shows a spinner animation.
     public void Spinner()
     {
         
@@ -89,6 +95,8 @@ public class Activity
 
 
     }
+    
+    // Displays a countdown for the user based on programmer input.
     public void ShowCountdown(int length)
     {
         // Countdown
@@ -99,13 +107,17 @@ public class Activity
             Console.Write("\b \b");
         }
     }
+    
+    // Shows a random prompt to the user.
     public void DisplayPrompt(List<string> Prompts)
     {
         int length = Prompts.Count;
-        int RandomNum = RandomNumGen(length - 1);
+        int RandomNum = RandomNumGen(length - 1); // Generates random number.
         Console.WriteLine($" --- {Prompts[RandomNum]} --- ");
         
     }
+    
+    // Generates a random number from 0 to programmer input.
     public int RandomNumGen(int NumRange)
     {
         Random random = new Random();

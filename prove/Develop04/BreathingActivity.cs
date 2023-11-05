@@ -1,12 +1,12 @@
 class BreathingActivity : Activity
 {
 
-
     public BreathingActivity(string activityName, string activityDescription) : base(activityName, activityDescription)
     {
 
     }
 
+    // Breathing Actvity.
     public void DeepBreathing() 
     {
         
@@ -14,41 +14,56 @@ class BreathingActivity : Activity
         Console.WriteLine("Get Ready...");
         Spinner();
         
+        // Determines how the long the activity is.
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(Duration);
         
         
+        // Loop until time runs out
         while (DateTime.Now < endTime)
         {
             // Breath in
-            Console.Write("\nBreathe in...");
-            ShowCountdown(4);
+            Console.WriteLine("\nBreathe in...");
+            BreatheIn(4);
          
             // Breath out
-            Console.Write("\nBreathe out...");
-            ShowCountdown(6);
+            Console.WriteLine("\nBreathe out...");
+            BreatheOut(6);
             Console.WriteLine();
             
         }
+  
+    }
+
+    // Breathe in animation.
+    public void BreatheIn(int length)
+    {
         
-        // print a certain amount of something
-        // string spaces = new string(' ', 4);
-        // Console.Write(spaces);
-        
+        Console.Write("<");
+        for (int i = length; i > 0; i--)
+        {
+            Console.Write("-");
+            Thread.Sleep(1000);
+        }   
         
     }
 
-    public void BreathingAnimation()
+    // Breate out animation.
+    public void BreatheOut(int length)
     {
+        
+        int cursorLeft = Console.CursorLeft; // Keep track of starting postion.
 
-        for (int i = 5; i > 0; i--)
+        for (int i = 1; i <= length; i++)
         {
-            Console.Write(".");
+            string dashes = new string('-', i);
+            Console.SetCursorPosition(cursorLeft, Console.CursorTop); // Set cursor position
+            Console.Write(dashes + ">");
+            
+
             Thread.Sleep(1000);
         }
-
-
+       
     }
-    
     
 }

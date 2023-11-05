@@ -5,6 +5,7 @@ class ListingActvity : Activity
 
     }
     
+    // Stores prompts for the user.
     private List<string> _listingPrompts = new List<string>
     {
         "Who are people that you appreciate?",
@@ -14,11 +15,11 @@ class ListingActvity : Activity
         "Who are some of your personal heroes?"
     };
 
+    // Listing Activity. 
     public void Listing()
     {
         Console.WriteLine("Get Ready...");
         Spinner();
-
         Console.WriteLine("\nList as many responses as you can to the following prompt:");
         DisplayPrompt(_listingPrompts);
         Console.WriteLine("You may begin in: ");
@@ -27,13 +28,16 @@ class ListingActvity : Activity
 
     }
 
+    // Displays the Entries to the user and saves how many items they list.
     public void CollectEntries()
     {
         List<string> Entries = new List<string>();
 
+        // Determines how the long the activity is.
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(Duration); 
         
+        // Loop until the time runs out.
         while (DateTime.Now < endTime)
         {
             
@@ -42,6 +46,7 @@ class ListingActvity : Activity
            
         }
 
+        // Show the item count.
         int EntryNum = Entries.Count;
         Console.WriteLine($"You listed {EntryNum} items");
         
