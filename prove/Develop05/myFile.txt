@@ -1,0 +1,5 @@
+850
+SimpleGoal~simp~simpasdfsadf~100~True
+EternalGoal~eternal~asdfsadf~50~2
+CheckListGoal~check~asdfsadf~50~True~3~3~500
+CheckListGoal~chekc2~asdf~10~False~0~10~1000
