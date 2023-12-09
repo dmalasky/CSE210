@@ -5,8 +5,7 @@ public class Account
 {
     public string Username { get; private set; }    
     public string Password { get; private set; }
-    public bool IsManager { get; private set; }
-    public Employee EmployeeType { get; private set; }    
+    public bool IsManager { get; private set; }    
 
 
     public Account()
@@ -25,14 +24,10 @@ public class Account
         IsManager = isManager;
     }
 
-    public void SetEmployeeType(Employee employeeType)
-    {
-        EmployeeType = employeeType;
-    }
 
-    public virtual void ShowMenu()
+    public virtual string SaveAccountFormat()
     {
-
+        return $"{Username}~{Password}~{IsManager}";
     }
     
 }

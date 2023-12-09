@@ -1,5 +1,4 @@
-asdf, asdf, False 
-asdfasdf, asdfasd, True
-DAniel, Malsdfy, False
-asdf, asdf, True 
-ewq, wer, True 
+test, test, True
+no, no, False
+Dmal, asdf1234, False
+Deez, uno, True 

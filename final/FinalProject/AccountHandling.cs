@@ -1,7 +1,7 @@
 public class AccountHandling 
 {
 
-    
+
     Account account = new Account();
     List<Account> AccountList = new List<Account>();
 
@@ -23,82 +23,110 @@ public class AccountHandling
     }  
         
 
-
-    public void CreateAccount()
+    
+    public void CreateManagerAccount()
     {
 
         // TODO
         // Add username taken
         // Add correct reprompting
-        // Only ask for manager key when is manager is asked.
         // Add employee ID
         
-        string choice = "";
+        string managerKey = "";
         do 
         {
             
+            Console.Write("What is the manager key? (For testing it's '123'): ");
+            managerKey = Console.ReadLine();
+
             bool isManager = false;
-            isManager = VerifyMangerKey();
-        
+            isManager = VerifyMangerKey(managerKey);
+
             
             // Checks if user has manager key and sets isManager.
-            
             if (isManager == true)
             {
+                Console.WriteLine("Welcome, please proceed.\n");
                 Console.Write("Username: ");
                 string username = Console.ReadLine();
                 Console.Write("Password: ");
                 string password = Console.ReadLine();
 
                 // Create and add manager account to AccountList.
-                AccountManager accountManager = new AccountManager(username, password, isManager);
-                AccountList.Add(accountManager);
+                Account managerAccount = new Account(username, password, isManager);
+                AccountList.Add(managerAccount);
+
+
 
                 // Add new manager account to AccountData.txt.
                 using (StreamWriter outputFile = new StreamWriter("AccountData.txt", true)) // true appends data to file
                 {
                     outputFile.WriteLine($"{username}, {password}, {isManager} ");
                 }
-
-                choice = "b";  
+                
+                // Ends the function.
+                managerKey = "b";
+                
+            }
+            else
+            {
+                Console.WriteLine("\nSorry that is incorrect. Please try again or type 'b' to go back.\n");
             }
             
-            choice = Console.ReadLine();
+            
             
         
             
-        } while (choice != "b");
+        } while (managerKey != "b");
 
          
     }
 
+    // Creates an account for the employees
+    public Account CreateEmployeeAccount()
+    {   
+        Console.Write("Username: ");
+        string username = Console.ReadLine();
+        Console.Write("Password: ");
+        string password = Console.ReadLine();
 
-    // Loop this in the previous function. should just say yest or no
-    // OR just give them one chance.
-    public bool VerifyMangerKey()
+        // Create and add manager account to AccountList.
+        Account employeeAccount = new Account(username, password, false);
+        AccountList.Add(employeeAccount);
+        SaveAccount(username, password); // temp
+        
+        return employeeAccount;
+    }
+
+    public void SaveAccount(string username, string password)
     {
-        string key = "";
+         // Add new manager account to AccountData.txt.
+        using (StreamWriter outputFile = new StreamWriter("AccountData.txt", true)) // true appends data to file
+        {
+            outputFile.WriteLine($"{username}, {password}, {false} ");
+        }
+    }
+
+
+    // Returns true if user has the manager key, false otherwise.
+    public bool VerifyMangerKey(string key)
+    {
         do
         {
-            Console.WriteLine("What is the manager key? (For testing it's '123')");
-            key = Console.ReadLine();
             if (key == "123")
             {
-                Console.WriteLine("Welcome, please proceed.");
                 return true;
             }
             else
             {
-                Console.WriteLine("Sorry that is incorrect. Press enter to try again or type 'b' to go back");
                 return false;
-
-            }
-            
+            }  
 
         } while(key != "123");
     }
 
-    public bool Login()
+    // Logs the user in if they have accurate info.
+    public Account Login()
     {
         
         Console.Write("Username: ");
@@ -117,14 +145,24 @@ public class AccountHandling
 
             if (parts[0] == username && parts[1] == password)
             {
-                return true;
+                Console.WriteLine("Authenticated.");
+                Account CurrentUser = new Account(parts[0], parts[1], Convert.ToBoolean(parts[2]));
+
+                return CurrentUser;
+            }
+            else
+            {
+                Console.WriteLine("Incorrect username or password, please try again.\n");
             }
             
         }
 
-        return false;
+        return null;
         
     }
+
+
+    
 
 
 }

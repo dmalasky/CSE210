@@ -1,10 +1,13 @@
 using System;
 
 // TODO
-// Make it so only manager can create accounts, they will have to add employees to the system.
+// X - Make it so only manager can create accounts, they will have to add employees to the system. 
 // Add forgot username/password option (use employeeID to find)
-// Add an employee type to each account. OR maybe combine Account into Employee , not sure yet.
+// 1. Figure out how to save account information with Employee info
 // Make the calculate pay functions
+// add an option to quit the program.
+// 2. Make it so when you login all you data is loaded in. 
+// Make sure the program flows (reprompts and such )
 
 
 class Program
@@ -12,9 +15,8 @@ class Program
     static void Main(string[] args)
     {
         AccountHandling accountHandling = new AccountHandling();
-        AccountEmployee accountEmployee = new AccountEmployee();
-        AccountManager accountManager = new AccountManager();
-
+        UI uI = new UI();
+        EmployeeHandling employeeHandling = new EmployeeHandling();
 
         
         
@@ -31,23 +33,20 @@ class Program
 
             if (choice == "1")
             {
-                if (accountHandling.Login() == true)
+                Account CurrentUser = accountHandling.Login();
+                
+                // Reprompts if wrong info.
+                if (CurrentUser == null)
                 {
-                    Console.WriteLine("Authenticated.");
-                    accountEmployee.ShowMenu();
-                    
+                    choice = ""; 
+                }
 
-                }
-                else
-                {
-                    Console.WriteLine("Incorrect username or password, please try again.\n");
-                    choice = ""; // reprompt
-                }
+                uI.ShowMainMenu(CurrentUser.IsManager);
                 
             }
             else if (choice == "2")
             {
-                accountHandling.CreateAccount();
+                accountHandling.CreateManagerAccount();
                 // Have code reprompt if user selects 'b' inside this function.
                 
             }
