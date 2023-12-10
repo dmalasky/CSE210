@@ -1,4 +1,2 @@
 test, test, True
-no, no, False
-Dmal, asdf1234, False
-Deez, uno, True 
+asdf, asdf, True 

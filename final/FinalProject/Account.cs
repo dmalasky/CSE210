@@ -7,7 +7,6 @@ public class Account
     public string Password { get; private set; }
     public bool IsManager { get; private set; }    
 
-
     public Account()
     {
 
@@ -24,7 +23,7 @@ public class Account
         IsManager = isManager;
     }
 
-
+    // Formatting for saving data.
     public virtual string SaveAccountFormat()
     {
         return $"{Username}~{Password}~{IsManager}";

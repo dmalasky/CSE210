@@ -1,13 +1,15 @@
 using System;
+using System.Data.Common;
 
 // TODO
 // X - Make it so only manager can create accounts, they will have to add employees to the system. 
 // Add forgot username/password option (use employeeID to find)
 // 1. Figure out how to save account information with Employee info
-// Make the calculate pay functions
-// add an option to quit the program.
 // 2. Make it so when you login all you data is loaded in. 
 // Make sure the program flows (reprompts and such )
+// 
+
+
 
 
 class Program
@@ -16,47 +18,59 @@ class Program
     {
         AccountHandling accountHandling = new AccountHandling();
         UI uI = new UI();
-        EmployeeHandling employeeHandling = new EmployeeHandling();
 
-        
-        
         // Give user the option to login or create an account.
-        // Reprompt user until they select 1 or 2.
+        // Reprompts user until they select 1 or 2.
         string choice = "";
         do 
         {
-            Console.WriteLine("\nWelcome to Payroll, Please login or create an account.");
+            Console.WriteLine("\nWelcome to Payroll, Please login or create an account. Or type 'q' to quit.");
             Console.WriteLine("\t1. Login");
             Console.WriteLine("\t2. Create Account (Manager Only)");
             Console.Write("Choose an option: ");
             choice = Console.ReadLine();
 
+            // Login.
             if (choice == "1")
             {
-                Account CurrentUser = accountHandling.Login();
-                
-                // Reprompts if wrong info.
-                if (CurrentUser == null)
-                {
-                    choice = ""; 
-                }
+                bool IsLoggedIn = false;
+                bool done = false;
 
-                uI.ShowMainMenu(CurrentUser.IsManager);
-                
+                while (!done)
+                {
+                    IsLoggedIn = accountHandling.Login();
+                    
+                    if (IsLoggedIn)
+                    {
+                        done = true;
+                        uI.ShowMainMenu();
+                    }
+                    else
+                    {
+                        Console.Write("Would you like to try again? (y/n): ");
+                        string tryAgain = Console.ReadLine();
+
+                        if (tryAgain == "n")
+                        {
+                            done = true;
+                        }
+                    }
+                }
             }
+            // Create account.
             else if (choice == "2")
             {
                 accountHandling.CreateManagerAccount();
-                // Have code reprompt if user selects 'b' inside this function.
-                
+            }
+            else if (choice == "q")
+            {
+                Console.WriteLine("Have a good day!");
             }
             else
             {
                 Console.WriteLine("Please select option 1 or 2");
             }
             
-        } while (choice != "1" && choice != "2");
-        
-    
+        } while (choice.ToLower() != "q" );
     }
 }

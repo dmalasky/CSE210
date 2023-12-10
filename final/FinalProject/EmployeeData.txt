@@ -1,1 +1,3 @@
-
+1000~EmployeeHourly~Jim~Cooper~455-698-8965~asdf@asdf.com~3~10
+9270~EmployeeSalary~John~amith~123~321~4
+4429~EmployeeCommission~asdf~asdf~321~123~102

@@ -82,32 +82,6 @@ public class AccountHandling
          
     }
 
-    // Creates an account for the employees
-    public Account CreateEmployeeAccount()
-    {   
-        Console.Write("Username: ");
-        string username = Console.ReadLine();
-        Console.Write("Password: ");
-        string password = Console.ReadLine();
-
-        // Create and add manager account to AccountList.
-        Account employeeAccount = new Account(username, password, false);
-        AccountList.Add(employeeAccount);
-        SaveAccount(username, password); // temp
-        
-        return employeeAccount;
-    }
-
-    public void SaveAccount(string username, string password)
-    {
-         // Add new manager account to AccountData.txt.
-        using (StreamWriter outputFile = new StreamWriter("AccountData.txt", true)) // true appends data to file
-        {
-            outputFile.WriteLine($"{username}, {password}, {false} ");
-        }
-    }
-
-
     // Returns true if user has the manager key, false otherwise.
     public bool VerifyMangerKey(string key)
     {
@@ -125,8 +99,8 @@ public class AccountHandling
         } while(key != "123");
     }
 
-    // Logs the user in if they have accurate info.
-    public Account Login()
+    // Returns true if info is good
+    public bool Login()
     {
         
         Console.Write("Username: ");
@@ -141,23 +115,18 @@ public class AccountHandling
         {
             
             string[] parts = line.Split(", ");
-            Console.WriteLine(parts[0]);
 
             if (parts[0] == username && parts[1] == password)
             {
                 Console.WriteLine("Authenticated.");
-                Account CurrentUser = new Account(parts[0], parts[1], Convert.ToBoolean(parts[2]));
 
-                return CurrentUser;
-            }
-            else
-            {
-                Console.WriteLine("Incorrect username or password, please try again.\n");
+                return true;
             }
             
         }
+        Console.WriteLine("Incorrect username or password, please try again.\n");
 
-        return null;
+        return false;
         
     }
 

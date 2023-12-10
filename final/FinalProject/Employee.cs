@@ -7,8 +7,8 @@ public abstract class Employee
     public string Phone { get; private set; }
     public string Email { get; private set; }
     public int EmployeeID { get; private set; }
-    public Account Account {get; private set; }
 
+    protected int HoursInWorkWeek = 40; // The program currently calcs pay for a single week at a time.
 
     public abstract float CalculatePay();
 
@@ -17,16 +17,6 @@ public abstract class Employee
 
     }
 
-    public Employee(string fName, string lName, string phone, string email, int employeeID, Account account)
-    {
-        FName = fName;
-        LName = lName;
-        Phone = phone;
-        Email = email;
-        EmployeeID = employeeID;
-        Account = account;
-
-    }
     public Employee(string fName, string lName, string phone, string email, int employeeID)
     {
         FName = fName;
@@ -36,9 +26,8 @@ public abstract class Employee
         EmployeeID = employeeID;
 
     }
-
-    
-
+  
+    // Formatting for saving data.
     public virtual string SaveEmployeeFormat()
     {
         return $"{EmployeeID}~{GetType()}~{FName}~{LName}~{Phone}~{Email}";
