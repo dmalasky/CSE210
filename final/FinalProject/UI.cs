@@ -78,14 +78,29 @@ public class UI
 
                 // Add Employee
                 case "2":
-                    
-                    Console.WriteLine("How will the employee be paid? ");
-                    Console.WriteLine("\t1. Salary");
-                    Console.WriteLine("\t2. Hourly");
-                    Console.WriteLine("\t3. Comission");
-                    Console.Write("Choose an option: ");
-                    string empType = Console.ReadLine();
-                    employeeHandling.CreateNewEmployee(empType);
+                    bool finished = false;
+                    do
+                    {
+                        Console.WriteLine("How will the employee be paid? ");
+                        Console.WriteLine("\t1. Salary");
+                        Console.WriteLine("\t2. Hourly");
+                        Console.WriteLine("\t3. Comission");
+                        Console.Write("Choose an option: ");
+                        string empType = Console.ReadLine();
+                        switch (empType)
+                        {
+                            case "1":
+                            case "2":
+                            case "3":
+                                employeeHandling.CreateNewEmployee(empType);
+                                finished = true;
+                                break;
+                            default:
+                                Console.WriteLine("Invalid input.");
+                                break;
+                        }
+                        
+                    } while (!finished);
 
                     break;
 

@@ -62,14 +62,12 @@ public class EmployeeHandling
                 }
         }
         Console.WriteLine($"\n{fName}'s account was successfully created!");
-        Console.WriteLine("Inform commission employees it is their responsibility to record their jobs, so that they may be paid correct wages.");
-        Console.WriteLine(employeeID);
 
         //temp
-        foreach (Employee emp in EmployeeList)
-        {
-            SaveEmployee();
-        }
+       
+        SaveEmployee();
+        EmployeeList.Clear();
+        
         // Create save function.
     }
 
@@ -115,7 +113,6 @@ public class EmployeeHandling
         try
         {
             string[] lines = File.ReadAllLines(filePath);
-            Console.WriteLine("File read");
 
             // Generates new IDs until an original is found.
             while (IsEmployeeIDTaken(NewID, lines))
@@ -522,7 +519,7 @@ public class EmployeeHandling
 
         do
         {
-            Console.Write("Which employee are you looking for? Or type 'b' to go back: ");
+            Console.Write("Pleas input an Employee ID, or type 'b' to go back: ");
             string IDToSearchFor = Console.ReadLine();
             if (IDToSearchFor == "b")
             {
@@ -615,17 +612,17 @@ public class EmployeeHandling
         if (parts[1] == "EmployeeSalary")
         {
             EmployeeSalary employeeSalary = new EmployeeSalary(float.Parse(parts[6]));
-            Console.WriteLine(employeeSalary.CalculatePay());
+            Console.WriteLine($"Current Pay: employeeSalary.CalculatePay()");
         }
         else if (parts[1] == "EmployeeHourly")
         {
             EmployeeHourly employeeHourly = new EmployeeHourly(float.Parse(parts[6]), float.Parse(parts[7]));
-            Console.WriteLine(employeeHourly.CalculatePay());
+            Console.WriteLine($"Current Pay: employeeHourly.CalculatePay()");
         }
         else if (parts[1] == "EmployeeCommission")
         {
             EmployeeCommission employeeCommission = new EmployeeCommission(float.Parse(parts[6]));
-            Console.WriteLine(employeeCommission.CalculatePay());
+            Console.WriteLine($"Current Pay: {employeeCommission.CalculatePay()}");
         }
     }
 
